@@ -6,6 +6,13 @@ import (
 	"strings"
 )
 
+const (
+	ADD = "+"
+	SUB = "-"
+	MUL = "*"
+	DIV = "/"
+)
+
 func sum(a, b float64) (float64, error) {
 	return a + b, nil
 }
@@ -25,14 +32,30 @@ func divide(a, b float64) (float64, error) {
 	return a / b, nil
 }
 
-func main() {
-	const (
-		ADD = "+"
-		SUB = "-"
-		MUL = "*"
-		DIV = "/"
-	)
+func expressionToParts(expression string) ([]string, error) {
+	expression = strings.ReplaceAll(expression, " ", "")
 
+	expression = strings.ReplaceAll(expression, "+", " + ")
+	expression = strings.ReplaceAll(expression, "-", " - ")
+	expression = strings.ReplaceAll(expression, "*", " * ")
+	expression = strings.ReplaceAll(expression, "/", " / ")
+
+	parts := strings.Fields(expression)
+
+	if len(parts) == 0 {
+		return nil, errors.New("No valid parts found in the expression")
+	}
+
+	return parts, nil
+}
+
+func evaluateExpression(parts []string) (float64, error) {
+	if len(parts) == 0 {
+		return 0, errors.New("No valid parts found")
+	}
+
+	result := 0.0
+	var currentOp string
 	operations := map[string]func(float64, float64) (float64, error){
 		ADD: sum,
 		SUB: subtract,
@@ -40,42 +63,36 @@ func main() {
 		DIV: divide,
 	}
 
+	// [23, '+', 21]
+	
+	// get first 3 elements
+
+	// const [one,two, three, ...rest] = parts
+
+	return result, nil
+}
+
+func main() {
 	for {
-		var firstNumber, secondNumber float64
-		var operation string
+		var expression string
 
-		fmt.Print("Type the first number: ")
-		fmt.Scanln(&firstNumber)
+		// wait for user input
+		fmt.Scanln(&expression)
 
-		fmt.Println("Choose an operation: addition(+), subtraction(-), multiplication(*), division(/)")
-		fmt.Scanln(&operation)
-
-		fmt.Print("Type the second number: ")
-		fmt.Scanln(&secondNumber)
-
-		opFunc, ok := operations[operation]
-
-		if !ok {
-			fmt.Println("Invalid operation. Please choose one of the following: +, -, *, /")
-			return
-		}
-
-		result, err := opFunc(firstNumber, secondNumber)
+		parts, err := expressionToParts(expression)
 		if err != nil {
 			fmt.Println("Error:", err)
-			fmt.Println("Please try again with valid numbers")
-			return
+			continue
 		}
 
-		fmt.Printf("The result of %.2f %s %.2f is: %.2f\n", firstNumber, operation, secondNumber, result)
-		
-		var choice string
-		fmt.Print("Do you want to calculate again? (y/n): ")
-		fmt.Scanln(&choice)
-
-		if strings.ToLower(choice) != "y" {
-			fmt.Println("Thank you for using the calculator!")
-			break
+		evaluateExpression, err := evaluateExpression(parts)
+		if err != nil {
+			fmt.Println("Error:", err)
+			continue
 		}
+		fmt.Println(evaluateExpression)
+
+
+		break
 	}
 }
