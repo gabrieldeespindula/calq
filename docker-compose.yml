@@ -5,5 +5,3 @@ services:
     build: .
     volumes:
       - ./app:/app
-    working_dir: /app
-    command: go run main.go
