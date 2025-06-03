@@ -1,59 +1,90 @@
-# Go Playground com Docker Compose
+# 🧮 Go Calculator (with Docker)
 
-Este projeto é um ambiente simples para aprender Go dentro de um container Docker, com hot reload básico para testar código de forma rápida.
+Esta é uma calculadora de linha de comando escrita em Go, que permite realizar as quatro operações básicas: **adição, subtração, multiplicação e divisão**, com suporte a **números decimais (float64)**.
 
-## O que ele faz?
+O projeto está totalmente empacotado com Docker, permitindo que você execute o código sem precisar instalar o Go localmente.
 
-* Um programa Go que lê dois números e uma operação (+, -, \*, /) do usuário.
-* Realiza o cálculo solicitado e exibe o resultado.
-* Trata divisão por zero e operações inválidas com mensagens apropriadas.
+---
 
-## Estrutura
+## 🚀 Como rodar com Docker Compose
 
-* `Dockerfile`: cria a imagem Go, define diretório de trabalho e comando padrão para rodar o app.
-* `docker-compose.yml`: configura serviço `go`, monta volume para sincronizar código local com container.
-* `app/main.go`: código-fonte Go do programa interativo.
+### Pré-requisitos
 
-## Como rodar
+- Docker instalado
+- Docker Compose (v2 ou superior)
 
-1. Clone o projeto e entre na pasta:
+---
 
-   ```bash
-   git clone <repo-url>
-   cd <pasta-do-projeto>
-   ```
+### 📁 Estrutura do Projeto
 
-2. Execute o container interativo para rodar o app:
+```
 
-   ```bash
-   docker compose run --rm -it go
-   ```
+.
+├── app
+│   └── main.go          # Código da calculadora
+├── Dockerfile           # Instruções para construir o container
+└── docker-compose.yml   # Orquestração do container
 
-3. O programa pedirá que você digite dois números e escolha uma operação. Exemplo:
+````
 
-   ```
-   Digite o primeiro número: 10
-   Escolha uma operação: soma(+), subtração(-), multiplicação(*), divisão(/)
-   +
-   Digite o segundo número: 5
-   Resultado: 15
-   ```
+---
 
-## Desenvolvimento
+### 📦 Build do projeto (opcional)
 
-* Você pode editar o código localmente em `app/main.go`.
-* Ao rodar o container com `docker compose run --rm -it go`, seu código será executado dentro do container.
+```bash
+docker compose build
+````
 
-## Comandos úteis
+> Você só precisa fazer isso se mudar o `Dockerfile`.
 
-* Para abrir um shell no container e rodar comandos Go manualmente:
+---
 
-  ```bash
-  docker compose run --rm -it go bash
-  ```
+### ▶️ Executando a calculadora
 
-* Para reconstruir a imagem (se mudar o Dockerfile):
+Use o seguinte comando para rodar a calculadora no terminal:
 
-  ```bash
-  docker compose build
-  ```
+```bash
+docker compose run --rm -it go
+```
+
+* `--rm` remove o container assim que o programa termina.
+* `-it` permite entrada interativa via terminal (necessário para o `fmt.Scanln` funcionar corretamente).
+* `go` é o nome do serviço no `docker-compose.yml`.
+
+---
+
+## 🧠 Funcionalidades
+
+* Lê dois números `float64` do usuário
+* Permite escolher a operação: `+`, `-`, `*`, `/`
+* Trata divisão por zero com erro amigável
+* Loop para múltiplos cálculos, com opção de sair (`y/n`)
+
+---
+
+## 📌 Exemplo de uso
+
+```text
+Type the first number: 10.5
+Choose an operation: addition(+), subtraction(-), multiplication(*), division(/)
++
+Type the second number: 2
+
+The result of 10.50 + 2.00 is: 12.50
+Do you want to calculate again? (y/n): n
+Thank you for using the calculator!
+```
+
+---
+
+## 🛠️ Tecnologias
+
+* [Go 1.22](https://go.dev/doc/go1.22)
+* Docker e Docker Compose
+
+---
+
+## 📄 Licença
+
+Este projeto é livre para estudo e modificação.
+

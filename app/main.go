@@ -41,7 +41,6 @@ func main() {
 	}
 
 	for {
-
 		var firstNumber, secondNumber float64
 		var operation string
 
