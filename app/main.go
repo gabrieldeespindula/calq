@@ -6,19 +6,19 @@ import (
 	"strings"
 )
 
-func sum(a, b int) (int, error) {
+func sum(a, b float64) (float64, error) {
 	return a + b, nil
 }
 
-func subtract(a, b int) (int, error) {
+func subtract(a, b float64) (float64, error) {
 	return a - b, nil
 }
 
-func multiply(a, b int) (int, error) {
+func multiply(a, b float64) (float64, error) {
 	return a * b, nil
 }
 
-func divide(a, b int) (int, error) {
+func divide(a, b float64) (float64, error) {
 	if b == 0 {
 		return 0, errors.New("Division by zero is not allowed")
 	}
@@ -33,7 +33,7 @@ func main() {
 		DIV = "/"
 	)
 
-	operations := map[string]func(int, int) (int, error){
+	operations := map[string]func(float64, float64) (float64, error){
 		ADD: sum,
 		SUB: subtract,
 		MUL: multiply,
@@ -42,7 +42,7 @@ func main() {
 
 	for {
 
-		var firstNumber, secondNumber int
+		var firstNumber, secondNumber float64
 		var operation string
 
 		fmt.Print("Type the first number: ")
@@ -68,7 +68,7 @@ func main() {
 			return
 		}
 
-		fmt.Printf("The result of %d %s %d is: %d\n", firstNumber, operation, secondNumber, result)
+		fmt.Printf("The result of %.2f %s %.2f is: %.2f\n", firstNumber, operation, secondNumber, result)
 		
 		var choice string
 		fmt.Print("Do you want to calculate again? (y/n): ")
