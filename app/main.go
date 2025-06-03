@@ -19,7 +19,7 @@ func multiply(a, b int) (int, error) {
 
 func divide(a, b int) (int, error) {
 	if b == 0 {
-		return 0, errors.New("divisão por zero não permitida")
+		return 0, errors.New("Division by zero is not allowed")
 	}
 	return a / b, nil
 }
@@ -54,15 +54,17 @@ func main() {
 	opFunc, ok := operations[operation]
 
 	if !ok {
-		fmt.Println("Operação inválida! Por favor escolha +, -, * ou /")
+		fmt.Println("Invalid operation. Please choose one of the following: +, -, *, /")
 		return
 	}
 
 	result, err := opFunc(firstNumber, secondNumber)
 	if err != nil {
-		fmt.Println("Erro:", err)
+		fmt.Println("Error:", err)
+		fmt.Println("Please try again with valid numbers")
 		return
 	}
 
-	fmt.Printf("Resultado: %d\n", result)
+	fmt.Printf("The result of %d %s %d is: %d\n", firstNumber, operation, secondNumber, result)
+	fmt.Println("Thank you for using the calculator!")
 }
