@@ -14,7 +14,7 @@ const (
 	DIV = "/"
 )
 
-func indexOfAny(slice []string, targets []string) int {
+func findIndexOfAny(slice []string, targets []string) int {
 	for i, v := range slice {
 		for _, t := range targets {
 			if v == t {
@@ -66,7 +66,7 @@ func expressionToParts(expression string, lastResult string) ([]string, error) {
 	if lastResult != "" {
 		if len(expression) > 0 {
 			firstChar := string(expression[0])
-			indexOfAny := indexOfAny([]string{firstChar}, []string{ADD, SUB, MUL, DIV})
+			indexOfAny := findIndexOfAny([]string{firstChar}, []string{ADD, SUB, MUL, DIV})
 
 			if indexOfAny != -1 {
 				expression = lastResult + expression
@@ -90,6 +90,19 @@ func expressionToParts(expression string, lastResult string) ([]string, error) {
 	return parts, nil
 }
 
+func findIndexOfOperator(parts []string) int {
+	indexOfAny := findIndexOfAny(parts, []string{MUL, DIV})
+	if indexOfAny != -1 {
+		return indexOfAny
+	}
+
+	indexOfAny = findIndexOfAny(parts, []string{ADD, SUB})
+	if indexOfAny != -1 {
+		return indexOfAny
+	}
+	return -1
+}
+
 func evaluateExpression(parts []string) (float64, error) {
 	if len(parts) == 0 {
 		return 0, errors.New("No valid parts found")
@@ -104,13 +117,13 @@ func evaluateExpression(parts []string) (float64, error) {
 		DIV: divide,
 	}
 
-	indexOfAny := indexOfAny(parts, []string{ADD, SUB, MUL, DIV})
+	indexOfOperator := findIndexOfOperator(parts)
 
-	if indexOfAny == -1 {
+	if indexOfOperator == -1 {
 		return 0, errors.New("No valid operator found in the expression")
 	}
 
-	aroundIndex := aroundIndex(parts, indexOfAny)
+	aroundIndex := aroundIndex(parts, indexOfOperator)
 
 	if len(aroundIndex) != 3 {
 		return 0, errors.New("Invalid expression format")
@@ -139,8 +152,8 @@ func evaluateExpression(parts []string) (float64, error) {
 	}
 
 	// Now we need to replace the evaluated part in the original parts slice
-	start := indexOfAny - 1
-	end := indexOfAny + 2
+	start := indexOfOperator - 1
+	end := indexOfOperator + 2
 	newParts := append(
 		append([]string{}, parts[:start]...), // antes de b
 		append([]string{fmt.Sprintf("%f", result)}, parts[end:]...)..., // p + depois de d
