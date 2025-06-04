@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bufio"
+	"os"
 	"errors"
 	"fmt"
 	"strconv"
@@ -119,9 +121,12 @@ func evaluate(parts []string) (float64, error) {
 
 func main() {
 	var lastResult string
+	reader := bufio.NewReader(os.Stdin)
+
 	for {
-		var input string
-		fmt.Scanln(&input)
+		input, err := reader.ReadString('\n')
+
+		fmt.Println("Input:", input)
 
 		tokens, err := tokenizeExpression(input, lastResult)
 		if err != nil {
