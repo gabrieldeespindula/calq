@@ -129,8 +129,6 @@ func evaluateExpression(parts []string) (float64, error) {
 		return 0, errors.New("Invalid expression format")
 	}
 
-	// aroundIndex is something like this: ['1', '+', '2']
-	// we need to convert the first and last elements to float64
 	firstNum, err := strconv.ParseFloat(aroundIndex[0], 64)
 	if err != nil {
 		return 0, fmt.Errorf("Invalid number: %s", aroundIndex[0])
@@ -141,7 +139,6 @@ func evaluateExpression(parts []string) (float64, error) {
 	}
 	currentOp = aroundIndex[1]
 
-	// now we can perform the operation
 	opFunc, exists := operations[currentOp]
 	if !exists {
 		return 0, fmt.Errorf("Invalid operator: %s", currentOp)
@@ -151,12 +148,11 @@ func evaluateExpression(parts []string) (float64, error) {
 		return 0, err
 	}
 
-	// Now we need to replace the evaluated part in the original parts slice
 	start := indexOfOperator - 1
 	end := indexOfOperator + 2
 	newParts := append(
-		append([]string{}, parts[:start]...), // antes de b
-		append([]string{fmt.Sprintf("%f", result)}, parts[end:]...)..., // p + depois de d
+		append([]string{}, parts[:start]...),
+		append([]string{fmt.Sprintf("%f", result)}, parts[end:]...)...,
 	)
 
 	if len(newParts) == 1 {
@@ -171,7 +167,6 @@ func main() {
 	for {
 		var expression string
 
-		// wait for user input
 		fmt.Scanln(&expression)
 
 		parts, err := expressionToParts(expression, lastResult)
