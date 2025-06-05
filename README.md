@@ -1,90 +1,112 @@
-# 🧮 Go Calculator (with Docker)
+# calq
 
-Esta é uma calculadora de linha de comando escrita em Go, que permite realizar as quatro operações básicas: **adição, subtração, multiplicação e divisão**, com suporte a **números decimais (float64)**.
+[![Release](https://img.shields.io/github/v/release/gabrieldeespindula/calq)](https://github.com/gabrieldeespindula/calq/releases)
 
-O projeto está totalmente empacotado com Docker, permitindo que você execute o código sem precisar instalar o Go localmente.
-
----
-
-## 🚀 Como rodar com Docker Compose
-
-### Pré-requisitos
-
-- Docker instalado
-- Docker Compose (v2 ou superior)
+A simple terminal calculator written in Go.  
+It evaluates basic mathematical expressions (addition, subtraction, multiplication, division) with operator precedence and supports using the last result in new expressions.
 
 ---
 
-### 📁 Estrutura do Projeto
+## Features
 
-```
-
-.
-├── app
-│   └── main.go          # Código da calculadora
-├── Dockerfile           # Instruções para construir o container
-└── docker-compose.yml   # Orquestração do container
-
-````
+- Parses and evaluates simple math expressions
+- Interactive terminal usage
+- Operator precedence handling (`*` and `/` before `+` and `-`)
+- Supports reusing the last result in new calculations
 
 ---
 
-### 📦 Build do projeto (opcional)
+## Usage
+
+### Prebuilt Executable (Release)
+
+Download the latest release from the [Releases](https://github.com/gabrieldeespindula/calq/releases) page, extract it, and run:
 
 ```bash
-docker compose build
+./calq
 ````
 
-> Você só precisa fazer isso se mudar o `Dockerfile`.
+Type your expressions and see the results.
+Press `Ctrl+C` to exit.
 
 ---
 
-### ▶️ Executando a calculadora
+### Development
 
-Use o seguinte comando para rodar a calculadora no terminal:
+To develop, build, or run the project locally using Docker and Makefile (no Go installation required):
+
+1. Clone the repository:
 
 ```bash
-docker compose run --rm -it go
+git clone https://github.com/gabrieldeespindula/calq.git
+cd calq
 ```
 
-* `--rm` remove o container assim que o programa termina.
-* `-it` permite entrada interativa via terminal (necessário para o `fmt.Scanln` funcionar corretamente).
-* `go` é o nome do serviço no `docker-compose.yml`.
+2. To build the binary:
+
+```bash
+make build
+```
+
+3. To run the project without building:
+
+```bash
+make run
+```
+
+These commands run Go inside a Docker container to provide a clean and reproducible environment.
 
 ---
 
-## 🧠 Funcionalidades
+## Project Structure
 
-* Lê dois números `float64` do usuário
-* Permite escolher a operação: `+`, `-`, `*`, `/`
-* Trata divisão por zero com erro amigável
-* Loop para múltiplos cálculos, com opção de sair (`y/n`)
+* `cmd/calq/main.go`: application entrypoint
+* `internal/calculator/`: calculator logic (tokenization, evaluation, operations)
+* `Dockerfile`: Docker image for development environment
+* `docker-compose.yml`: Docker service config for development
+* `Makefile`: shortcuts for building and running using Docker
 
 ---
 
-## 📌 Exemplo de uso
+## Technologies
 
-```text
-Type the first number: 10.5
-Choose an operation: addition(+), subtraction(-), multiplication(*), division(/)
-+
-Type the second number: 2
+* Go 1.22
+* Docker (for isolated development environment)
+* Makefile (command automation)
 
-The result of 10.50 + 2.00 is: 12.50
-Do you want to calculate again? (y/n): n
-Thank you for using the calculator!
+---
+
+## Usage Examples
+
+```plaintext
+Welcome to calq! Type your expressions (Ctrl+C to exit):
+> 3 + 4 * 2
+11
+> + 5
+16
+> 100 / 4 - 7
+18
 ```
 
 ---
 
-## 🛠️ Tecnologias
+## Contributing
 
-* [Go 1.22](https://go.dev/doc/go1.22)
-* Docker e Docker Compose
+Contributions are welcome!
+Please open issues for bugs or feature requests, and submit pull requests for review.
 
 ---
 
-## 📄 Licença
+## License
 
-Este projeto é livre para estudo e modificação.
+MIT License © Gabriel de Espindula
 
+---
+
+## Contact
+
+Gabriel de Espindula – [@gabrieldeespindula](https://github.com/gabrieldeespindula)
+
+## About
+
+This project was created as a personal learning exercise to deepen my understanding of Go, building from scratch a simple calculator with expression parsing and evaluation. While libraries exist that solve this problem more comprehensively, this project focuses on educational purposes.
