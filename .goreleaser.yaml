@@ -1,0 +1,34 @@
+version: "1"
+
+builds:
+  - id: calq
+    main: ./cmd/calq
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X main.Version={{.Version}}
+    env:
+      - CGO_ENABLED=0
+
+archives:
+  - format: tar.gz
+    files:
+      - LICENSE
+      - README.md
+
+checksum:
+  name_template: 'checksums.txt'
+
+release:
+  github:
+    owner: gabrieldeespindula
+    name: calq
+    token: '{{ .Env.GITHUB_TOKEN }}'
+
+changelog:
+  use: git
