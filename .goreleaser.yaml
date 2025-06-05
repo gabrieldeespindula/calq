@@ -1,5 +1,3 @@
-version: "1"
-
 builds:
   - id: calq
     main: ./cmd/calq
@@ -28,7 +26,6 @@ release:
   github:
     owner: gabrieldeespindula
     name: calq
-    token: '{{ .Env.GITHUB_TOKEN }}'
 
 changelog:
   use: git
