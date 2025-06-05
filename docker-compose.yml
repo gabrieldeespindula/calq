@@ -2,4 +2,6 @@ services:
   go:
     build: .
     volumes:
-      - ./app:/app
+      - ./:/calq
+    stdin_open: true
+    tty: true

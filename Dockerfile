@@ -1,5 +1,7 @@
 FROM golang:1.22
 
-WORKDIR /app
+WORKDIR /calq
 
-CMD ["go", "run", "main.go"]
+COPY . .
+
+CMD ["bash"]
