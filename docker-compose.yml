@@ -1,7 +1,8 @@
 services:
-  go:
-    build: .
+  dev:
+    image: golang:1.22
     volumes:
-      - ./:/calq
+      - .:/calq
+    working_dir: /calq
     stdin_open: true
     tty: true
