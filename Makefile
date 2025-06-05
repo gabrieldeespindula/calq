@@ -1,5 +1,5 @@
 build:
-    docker compose run dev go build -o calq ./cmd/calq
+	docker compose run --rm dev go build -o calq ./cmd/calq
 
 run:
-	docker compose run dev go run ./cmd/calq
+	docker compose run --rm dev go run ./cmd/calq

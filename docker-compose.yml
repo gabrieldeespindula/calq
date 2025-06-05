@@ -1,6 +1,6 @@
 services:
   dev:
-    image: golang:1.22
+    image: golang:1.22-alpine
     volumes:
       - .:/calq
     working_dir: /calq
