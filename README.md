@@ -24,7 +24,7 @@ Download the latest release from the [Releases](https://github.com/gabrieldeespi
 
 ```bash
 ./calq
-````
+```
 
 Type your expressions and see the results.
 Press `Ctrl+C` to exit.
