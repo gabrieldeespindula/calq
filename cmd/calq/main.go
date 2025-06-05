@@ -8,6 +8,8 @@ import (
 	"calq/internal/calculator"
 )
 
+var Version = "dev"
+
 func main() {
 	var lastResult string
 	reader := bufio.NewReader(os.Stdin)
