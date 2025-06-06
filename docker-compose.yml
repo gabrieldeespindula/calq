@@ -6,3 +6,9 @@ services:
     working_dir: /calq
     stdin_open: true
     tty: true
+
+  releaser:
+    image: goreleaser/goreleaser:v2.5.0-nightly
+    volumes:
+      - .:/go/src/app
+    working_dir: /go/src/app
