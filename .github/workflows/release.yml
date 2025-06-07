@@ -1,17 +1,14 @@
-name: Release
+name: Build and Release
 
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - 'v*'
   workflow_dispatch:
 
 jobs:
-  release:
+  build:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout code
@@ -20,12 +17,9 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.22'
+          go-version: 1.22
 
-      - name: Install dependencies
-        run: go mod tidy
-
-      - name: Run Goreleaser
+      - name: Run GoReleaser release
         uses: goreleaser/goreleaser-action@v5
         with:
           version: latest
