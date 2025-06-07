@@ -1,4 +1,4 @@
-name: Build and Release
+name: Release
 
 on:
   push:
@@ -7,9 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -19,10 +18,10 @@ jobs:
         with:
           go-version: 1.22
 
-      - name: Run GoReleaser release
-        uses: goreleaser/goreleaser-action@v5
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v6
         with:
-          version: latest
+          version: '~> v2'
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
