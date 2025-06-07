@@ -4,7 +4,6 @@ on:
   push:
     tags:
       - 'v*'
-  workflow_dispatch:
 
 jobs:
   release:
@@ -24,4 +23,4 @@ jobs:
           version: '~> v2'
           args: release --clean
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

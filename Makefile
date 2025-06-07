@@ -3,3 +3,6 @@ build:
 
 run:
 	docker compose run --rm dev go run ./cmd/calq
+
+release-local:
+	docker compose run --rm releaser release --snapshot --clean
