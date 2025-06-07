@@ -1,0 +1,29 @@
+
+# <type>(<scope>): <short summary>
+#
+# Example:
+# feat(auth): add JWT token support for login
+#
+# Line 1: Type + Scope + Summary (max ~70 chars)
+# └── Type: choose one from the list below
+# └── Scope: optional, the area/module affected (e.g. login, api, user)
+# └── Summary: imperative tone, short and descriptive
+
+# Types:
+# feat     = A new feature (ex: feat(user): allow profile editing)
+# fix      = A bug fix (ex: fix(auth): handle invalid token error)
+# docs     = Documentation only changes (ex: docs(readme): update usage guide)
+# style    = Code style changes (formatting, no logic changes)
+# refactor = Code changes that neither fix a bug nor add a feature
+# test     = Adding or updating tests only
+# chore    = Maintenance tasks (ex: build scripts, CI, deps)
+
+# Optional extended description (after one blank line):
+#
+# Include details on what changed and why.
+# Use full sentences and wrap lines at ~72 chars.
+
+# Optional footer (issue references):
+#
+# Closes #123
+# Related to #456
