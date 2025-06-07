@@ -76,17 +76,11 @@ These commands run Go inside a Docker container to provide a clean and reproduci
 
 ---
 
-## Usage Examples
+## Demo
 
-```plaintext
-Welcome to calq! Type your expressions (Ctrl+C to exit):
-> 3 + 4 * 2
-11
-> + 5
-16
-> 100 / 4 - 7
-18
-```
+This GIF shows how the `calq` CLI tool works in a terminal environment:
+
+![calq demo](assets/demo/calq-demo.gif)
 
 ---
 
