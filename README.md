@@ -88,22 +88,24 @@ Welcome to calq! Type your expressions (Ctrl+C to exit):
 18
 ```
 
+---
+
 ## Local Release (Snapshot)
 
-Você pode gerar uma release local (snapshot) para testar os artefatos do GoReleaser sem publicar no GitHub. Isso ajuda a validar o build e a estrutura dos binários antes de uma release real.
+You can generate a local (snapshot) release to test the artifacts built by GoReleaser without publishing them to GitHub. This helps validate the build process and binary structure before creating an actual release.
 
-### Requisitos
+### Requirements
 
 * Docker
 * `docker-compose`
 
-### Rodando manualmente
+### Running Manually
 
 ```bash
 make release-local
 ```
 
-Isso usará o container `goreleaser/goreleaser` definido no `docker-compose.yml` para gerar os binários localmente dentro da pasta `dist/`.
+This will use the `goreleaser/goreleaser` container defined in `docker-compose.yml` to generate the binaries locally inside the `dist/` folder.
 
 ---
 
