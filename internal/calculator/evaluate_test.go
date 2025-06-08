@@ -12,18 +12,23 @@ func TestTokenize(t *testing.T) {
 		lastResult string
 		want       []string
 		wantErr    bool
+		errMsg     string
 	}{
-		{"", "", nil, true},
-		{"42", "", []string{"42"}, false},
-		{"2+2", "", []string{"2", "+", "2"}, false},
-		{" 3 * 4 ", "", []string{"3", "*", "4"}, false},
-		{"+5", "10", []string{"10", "+", "5"}, false}, // lastResult concat
+		{"", "", nil, true, "empty expression"},
+		{"42", "", []string{"42"}, false, ""},
+		{"2+2", "", []string{"2", "+", "2"}, false, ""},
+		{" 3 * 4 ", "", []string{"3", "*", "4"}, false, ""},
+		{"+5", "10", []string{"10", "+", "5"}, false, ""},
 	}
 
 	for _, tt := range tests {
 		got, err := Tokenize(tt.expr, tt.lastResult)
 		if (err != nil) != tt.wantErr {
 			t.Errorf("Tokenize(%q, %q) error = %v, wantErr %v", tt.expr, tt.lastResult, err, tt.wantErr)
+			continue
+		}
+		if err != nil && !strings.Contains(err.Error(), tt.errMsg) {
+			t.Errorf("Tokenize(%q, %q) error = %v, want error containing %q", tt.expr, tt.lastResult, err, tt.errMsg)
 			continue
 		}
 		if !reflect.DeepEqual(got, tt.want) {
