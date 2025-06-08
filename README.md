@@ -1,6 +1,7 @@
 # calq
 
 [![Release](https://img.shields.io/github/v/release/gabrieldeespindula/calq)](https://github.com/gabrieldeespindula/calq/releases)
+[![codecov](https://codecov.io/gh/gabrieldeespindula/calq/graph/badge.svg?token=ACOW5RTTLR)](https://codecov.io/gh/gabrieldeespindula/calq)
 
 A simple terminal calculator written in Go.  
 It evaluates basic mathematical expressions (addition, subtraction, multiplication, division) with operator precedence and supports using the last result in new expressions.
