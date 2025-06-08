@@ -43,19 +43,29 @@ git clone https://github.com/gabrieldeespindula/calq.git
 cd calq
 ```
 
-2. To build the binary:
-
-```bash
-make build
-```
-
-3. To run the project without building:
+2. To run the project:
 
 ```bash
 make run
 ```
 
 These commands run Go inside a Docker container to provide a clean and reproducible environment.
+
+---
+
+### Running Tests Locally
+
+To run tests and check code coverage locally, use:
+
+```bash
+make test
+```
+Run tests and generate coverage.out
+
+```bash
+make coverage
+```
+Run tests, generate and open coverage.html
 
 ---
 
