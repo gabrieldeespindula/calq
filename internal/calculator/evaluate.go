@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"regexp"
 )
 
 func Tokenize(expr, lastResult string) ([]string, error) {
@@ -13,16 +14,38 @@ func Tokenize(expr, lastResult string) ([]string, error) {
 		expr = lastResult + expr
 	}
 
+	re := regexp.MustCompile(`\d+`)
+	expr = re.ReplaceAllStringFunc(expr, func(match string) string {
+		return "#" + match + "#"
+	})
+
 	replacer := strings.NewReplacer(
 		ADD, " "+ADD+" ",
-		SUB, " "+SUB+" ",
 		MUL, " "+MUL+" ",
 		DIV, " "+DIV+" ",
+		SUB, " "+SUB+" ",
 	)
-	tokens := strings.Fields(replacer.Replace(expr))
+
+	expr = replacer.Replace(expr)
+
+	replacer = strings.NewReplacer(
+		"  " + SUB + " #", " "+SUB,
+		"#", "",
+	)
+
+	expr = replacer.Replace(expr)
+
+	tokens := strings.Fields(expr)
+
 	if len(tokens) == 0 {
 		return nil, errors.New("empty expression")
 	}
+
+	if len(tokens) > 0 && tokens[0] == "-" {
+		newToken := "-" + tokens[1]
+		tokens = append([]string{newToken}, tokens[2:]...)
+	}
+
 	return tokens, nil
 }
 
@@ -36,6 +59,7 @@ func Evaluate(parts []string) (float64, error) {
 		return 0, errors.New("no operator found")
 	}
 
+	fmt.Println("Evaluating:", parts, "Operator at index:", opIndex)
 	segment, err := extractOperands(parts, opIndex)
 	if err != nil {
 		return 0, err

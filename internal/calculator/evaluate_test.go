@@ -19,6 +19,8 @@ func TestTokenize(t *testing.T) {
 		{"2+2", "", []string{"2", "+", "2"}, false, ""},
 		{" 3 * 4 ", "", []string{"3", "*", "4"}, false, ""},
 		{"+5", "10", []string{"10", "+", "5"}, false, ""},
+		{"4*-5", "", []string{"4", "*", "-5"}, false, ""},
+		{"+2", "-4", []string{"-4", "+", "2"}, false, ""},
 	}
 
 	for _, tt := range tests {
@@ -77,7 +79,7 @@ func TestEvaluate(t *testing.T) {
 func TestEvaluateUnsupportedOperator(t *testing.T) {
 	originalOps := Operations
 	defer func() { Operations = originalOps }()
-	
+
 	Operations = map[string]Operation{}
 
 	parts := []string{"2", "+", "3"} // + is a known operator, but it's not in Operations now
