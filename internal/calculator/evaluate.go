@@ -59,7 +59,6 @@ func Evaluate(parts []string) (float64, error) {
 		return 0, errors.New("no operator found")
 	}
 
-	fmt.Println("Evaluating:", parts, "Operator at index:", opIndex)
 	segment, err := extractOperands(parts, opIndex)
 	if err != nil {
 		return 0, err
