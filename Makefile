@@ -7,7 +7,7 @@ run:
 release-local:
 	docker compose run --rm releaser release --snapshot --clean
 
-test:
+test: build
 	docker compose run --rm dev go test -coverprofile=coverage.out ./...
 
 coverage: test
