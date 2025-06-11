@@ -18,7 +18,7 @@ func TestRun(t *testing.T) {
 		{"3 + 5 * 2\n", "13"},
 		{"2 + 10 / 2\n+3\n", "> 7\n> 10"},
 		{"2 + 10 / 2\n2+3\n", "> 7\n> 5"},
-		{"20*j\n", "Evaluation error: invalid number: j"},
+		{"20*j\n", "Calculation error: invalid number: j"},
 		{"\n", "Welcome to calq! Type your expressions (Ctrl+C to exit):\n> > Goodbye!\n"},
 	}
 
