@@ -34,3 +34,6 @@ go.work.sum
 # MacOS
 .DS_Store
 dist/
+
+# Build
+calq
