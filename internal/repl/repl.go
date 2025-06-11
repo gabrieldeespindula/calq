@@ -32,15 +32,9 @@ func Run(in io.Reader, out io.Writer) {
 			break
 		}
 
-		tokens, err := calculator.Tokenize(input, lastResult)
+		result, err := calculator.Calculate(lastResult, input)
 		if err != nil {
-			fmt.Fprintln(out, "Tokenize error:", err)
-			continue
-		}
-
-		result, err := calculator.Evaluate(tokens)
-		if err != nil {
-			fmt.Fprintln(out, "Evaluation error:", err)
+			fmt.Fprintln(out, "Calculation error:", err)
 			continue
 		}
 
