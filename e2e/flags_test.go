@@ -8,15 +8,18 @@ import (
 )
 
 
-func TestShortVersionFlag(t *testing.T) {
+func TestVersionFlag(t *testing.T) {
+	runCalqVersionFlag(t, "--version")
 	runCalqVersionFlag(t, "-v")
 }
 
-func TestLongVersionFlag(t *testing.T) {
-	runCalqVersionFlag(t, "--version")
+func TestEvalFlag(t *testing.T) {
+	testEvalMultipleExpressions(t, "--eval")
+	testEvalMultipleExpressions(t, "-e")
 }
 
-func TestEvalMultipleExpressions(t *testing.T) {
+
+func runCalqEvalFlag(t *testing.T, flag string) {
     tests := []struct {
         expr     string
         expected string
@@ -30,7 +33,7 @@ func TestEvalMultipleExpressions(t *testing.T) {
 
     for _, tt := range tests {
         t.Run(tt.expr, func(t *testing.T) {
-            cmd := exec.Command("../calq", "--eval", tt.expr)
+            cmd := exec.Command("../calq", flag, tt.expr)
 
             var out bytes.Buffer
             cmd.Stdout = &out

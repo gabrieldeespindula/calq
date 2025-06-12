@@ -13,10 +13,11 @@ type VersionInfo struct {
 	Date    string
 }
 
-func RunParse(info VersionInfo, runApp func()) int {
+func RunParse(info VersionInfo, runApp func()) int {	
     showVersion := flag.Bool("version", false, "show the current version")
     showShort := flag.Bool("v", false, "show the current version (short)")
 	evalMode := flag.String("eval", "", "run in eval mode with a single expression (e.g. '1+1')")
+	evalModeShort := flag.String("e", "", "run in eval mode with a single expression (e.g. '1+1')")
 
     flag.Parse()
 
@@ -25,15 +26,19 @@ func RunParse(info VersionInfo, runApp func()) int {
         return 0
     }
 
-    if *evalMode != "" {
-		result, err := calculator.Calculate("", *evalMode)
+    if *evalMode != "" || *evalModeShort != "" {
+		expr := *evalMode
+		if expr == "" {
+			expr = *evalModeShort
+		}
+	
+		result, err := calculator.Calculate("", expr)
 		if err != nil {
 			fmt.Printf("Calculation error: %v\n", err)
 			return 1
 		}
-
 		fmt.Printf("%.2f\n", result)
-        return 0
+		return 0
     }
 
     runApp()
