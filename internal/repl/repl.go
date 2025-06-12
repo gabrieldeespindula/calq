@@ -13,7 +13,7 @@ func Run(in io.Reader, out io.Writer) {
 	var lastResult string
 	reader := bufio.NewReader(in)
 
-	fmt.Fprintln(out, "Welcome to calq! Type your expressions (Ctrl+C to exit):")
+	fmt.Fprintln(out, "Welcome to calq! Type your expressions (type 'q' + Enter to quit, or press Ctrl+C):")
 	for {
 		fmt.Fprint(out, "> ")
 		input, err := reader.ReadString('\n')

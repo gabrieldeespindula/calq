@@ -19,7 +19,7 @@ func TestRun(t *testing.T) {
 		{"2 + 10 / 2\n+3\n", "> 7\n> 10"},
 		{"2 + 10 / 2\n2+3\n", "> 7\n> 5"},
 		{"20*j\n", "Calculation error: invalid number: j"},
-		{"\n", "Welcome to calq! Type your expressions (Ctrl+C to exit):\n> > Goodbye!\n"},
+		{"\n", "Welcome to calq! Type your expressions (type 'q' + Enter to quit, or press Ctrl+C):\n> > Goodbye!\n"},
 	}
 
 	for _, tt := range tests {
@@ -29,7 +29,7 @@ func TestRun(t *testing.T) {
 		Run(input, output)
 
 		got := output.String()
-		if !strings.Contains(got, "Welcome to calq! Type your expressions (Ctrl+C to exit):") {
+		if !strings.Contains(got, "Welcome to calq! Type your expressions (type 'q' + Enter to quit, or press Ctrl+C):") {
 			t.Errorf("expected welcome message, got %q", got)
 		}
 		if !strings.Contains(got, tt.expected) {
