@@ -20,6 +20,8 @@ func TestEvalFlag(t *testing.T) {
 
 
 func runCalqEvalFlag(t *testing.T, flag string) {
+    t.Helper()
+
     tests := []struct {
         expr     string
         expected string
