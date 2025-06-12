@@ -29,7 +29,7 @@ func TestRun(t *testing.T) {
 		Run(input, output)
 
 		got := output.String()
-		if !strings.Contains(got, "Welcome to calq! Type your expressions (Ctrl+C to exit):") {
+		if !strings.Contains(got, "Welcome to calq! Type your expressions (type 'q' + Enter to quit, or press Ctrl+C):") {
 			t.Errorf("expected welcome message, got %q", got)
 		}
 		if !strings.Contains(got, tt.expected) {
