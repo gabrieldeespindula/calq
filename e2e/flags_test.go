@@ -14,8 +14,8 @@ func TestVersionFlag(t *testing.T) {
 }
 
 func TestEvalFlag(t *testing.T) {
-	testEvalMultipleExpressions(t, "--eval")
-	testEvalMultipleExpressions(t, "-e")
+	runCalqEvalFlag(t, "--eval")
+	runCalqEvalFlag(t, "-e")
 }
 
 
